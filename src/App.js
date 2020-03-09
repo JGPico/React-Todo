@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
+import SearchForm from "./components/SearchForm";
 import "./components/Todo.css";
 
 const list = [
@@ -61,6 +62,12 @@ class App extends React.Component {
     })
   } // end clearCompleted
 
+  filterSearch = query => {
+    this.setState({
+      list: this.state.list.filter(item => item.task.toLowerCase().includes(query.toLowerCase()))
+    })
+  }
+
   render() {
     return (
       <div>
@@ -69,6 +76,7 @@ class App extends React.Component {
           <h2>To do list</h2>
           <TodoForm addTask={this.addTask}/>
         </div>
+        <SearchForm filterSearch={this.filterSearch}/>
         <TodoList list={this.state.list}
         toggleCompleted={this.toggleCompleted}
         clearCompleted={this.clearCompleted}/>
