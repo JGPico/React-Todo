@@ -1,6 +1,6 @@
 import React from "react";
 
-class TodoForm extends React.Component {
+class SearchForm extends React.Component {
 
     constructor() {
         super();
@@ -13,11 +13,11 @@ class TodoForm extends React.Component {
         this.setState({
             item: e.target.value
         });
+        this.props.filterSearch(this.state.item);
     };
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.addTask(this.state.item);
         e.target.reset();
     }
 
@@ -27,13 +27,13 @@ class TodoForm extends React.Component {
                 <input
                 type='text'
                 name='item'
+                placeholder='Enter search terms'
                 value={this.state.item}
                 onChange={this.handleChange}/>
-                
-                <button>Add</button>
+                <label htmlFor='item'>- Search</label>
             </form>
         )
     }
 }
 
-export default TodoForm;
+export default SearchForm;
